@@ -1,0 +1,24 @@
+drop table rzd.seats;
+drop table rzd.carriages;
+drop table rzd.trains;
+drop table rzd.routes;
+drop table rzd.users;
+
+insert into rzd.users(email, login, password)
+values ('z@mail', 'zot', '12345');
+
+insert into rzd.routes(city_from, city_to, date, user_id)
+values ('Moscow', 'Saratov', '2023-12-12', 1);
+
+insert into rzd.trains(name, route_id)
+values ('047Й', 1);
+
+insert into rzd.carriages(number, train_id)
+values ('4', 1);
+
+insert into rzd.seats(name, carriage_id)
+values ('Low', 1),
+       ('Up', 1);
+
+delete from rzd.users
+where id = 1;
