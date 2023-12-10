@@ -30,7 +30,6 @@ public class Route {
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_ROUTE_USER"))
     private User user;
 
-//    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne(mappedBy = "route")
     private Train train;
 }

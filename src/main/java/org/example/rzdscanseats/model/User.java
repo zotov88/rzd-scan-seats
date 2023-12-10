@@ -27,7 +27,18 @@ public class User {
 
     private String password;
 
+    private String name;
+
     private String email;
+
+    @ManyToOne
+    private Role role;
+
+    private String changePasswordToken;
+
+    private String tgBotToken;
+
+    private Long tgChatId;
 
     @Builder.Default
     @OnDelete(action = OnDeleteAction.CASCADE)

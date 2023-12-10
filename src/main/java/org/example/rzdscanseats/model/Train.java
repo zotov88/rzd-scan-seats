@@ -35,7 +35,7 @@ public class Train {
     @JoinColumn(name = "route_id")
     private Route route;
 
-    public void setRoutes(Route route) {
+    public void setRoute(Route route) {
         route.setTrain(this);
         this.route = route;
     }
