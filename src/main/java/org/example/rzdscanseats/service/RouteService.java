@@ -2,6 +2,7 @@ package org.example.rzdscanseats.service;
 
 import org.example.rzdscanseats.model.Route;
 import org.example.rzdscanseats.repository.RouteRepository;
+import org.example.rzdscanseats.service.util.scanroute.ScannerRoute;
 import org.springframework.stereotype.Service;
 
 @Service

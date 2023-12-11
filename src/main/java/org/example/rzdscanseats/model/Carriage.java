@@ -25,6 +25,9 @@ public class Carriage {
 
     private int number;
 
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
     @ManyToOne
     @JoinColumn(name = "train_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CARRIAGE_TRAIN"))
     private Train train;

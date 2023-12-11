@@ -1,4 +1,4 @@
-package org.example.rzdscanseats.service;
+package org.example.rzdscanseats.service.util.scanroute;
 
 import org.example.rzdscanseats.model.Route;
 import org.springframework.stereotype.Component;

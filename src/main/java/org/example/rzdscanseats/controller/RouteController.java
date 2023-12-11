@@ -1,7 +1,9 @@
 package org.example.rzdscanseats.controller;
 
+import org.example.rzdscanseats.model.Carriage;
 import org.example.rzdscanseats.model.Route;
 import org.example.rzdscanseats.model.Train;
+import org.example.rzdscanseats.model.Type;
 import org.example.rzdscanseats.service.RouteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,15 +24,20 @@ public class RouteController {
                       Model model) {
         model.addAttribute("routeModel", new Route());
         model.addAttribute("trainModel", new Train());
+        model.addAttribute("carriageModel", new Carriage());
+        model.addAttribute("typeCarriage", Type.values());
         return "routes/add";
     }
 
     @PostMapping("/add/{userId}")
     public String add(@PathVariable String userId,
-                      @ModelAttribute("routeModel") Route route,
-                      @ModelAttribute("trainModel") Train train) {
-        route.setTrain(train);
-        routeService.create(route);
+                      @ModelAttribute("routeModel") Route tmpRoute,
+                      @ModelAttribute("trainModel") Train tmpTrain,
+                      @ModelAttribute("carriageModel") Carriage tmpCarriage) {
+        tmpTrain.getCarriages().add(tmpCarriage);
+        tmpRoute.setTrain(tmpTrain);
+        System.out.println(tmpRoute);
+        routeService.create(tmpRoute);
         return "redirect:/routes/all/" + userId;
     }
 

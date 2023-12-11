@@ -36,14 +36,25 @@
                     <label for="name">Номер поезда</label>
                     <div class="invalid-feedback">Обязательное поле для заполнения</div>
                 </div>
-                <div class="col-md">
-                    <div class="form-floating">
-                        <input name="date" type="date" class="form-control" id="date" placeholder="Введите логин"
-                               required>
-                        <label for="date">Дата</label>
-                        <div class="invalid-feedback">Обязательное поле для заполнения</div>
-                    </div>
+            </div>
+            <div class="col-md">
+                <div class="form-floating">
+                    <input name="date" type="date" class="form-control" id="date" placeholder="Введите логин"
+                           required>
+                    <label for="date">Дата</label>
+                    <div class="invalid-feedback">Обязательное поле для заполнения</div>
                 </div>
+            </div>
+        </div>
+        <div class="mt-3 row g-2">
+            <div class="col-md">
+                <label for="type" class="form-label">Вагон</label>
+                <select class="form-select" name="type" id="type" required>
+                    <option selected value="default">Тип вагона</option>
+                    <option th:each="type : ${typeCarriage}"
+                            th:value="${type}"
+                            th:text="${type.getTypeName()}"></option>
+                </select>
             </div>
         </div>
         <div class="mt-3 row g-2">
