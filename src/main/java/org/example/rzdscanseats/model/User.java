@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(schema = "rzd", name = "users")
+@Table(schema = "rzd", name = "users",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "users_unique_login", columnNames = "login"),
+                @UniqueConstraint(name = "users_unique_email", columnNames = "email")
+        })
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,15 +27,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String login;
 
+    @Column(nullable = false)
     private String password;
 
     private String name;
 
+    @Column(nullable = false)
     private String email;
 
-    @ManyToOne
+    @Enumerated(value = EnumType.STRING)
     private Role role;
 
     private String changePasswordToken;

@@ -3,6 +3,7 @@ drop table rzd.carriages;
 drop table rzd.trains;
 drop table rzd.routes;
 drop table rzd.users;
+-- drop table rzd.roles;
 
 insert into rzd.users(email, login, password)
 values ('z@mail', 'zot', '12345');
@@ -22,3 +23,6 @@ values ('Low', 1),
 
 delete from rzd.users
 where id = 1;
+
+create unique index users_login_idx on rzd.users(login);
+drop index rzd.users_login_idx;
