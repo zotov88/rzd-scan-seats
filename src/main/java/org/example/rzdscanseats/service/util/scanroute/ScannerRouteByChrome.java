@@ -9,6 +9,7 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 
 import static org.example.rzdscanseats.constant.RouteConstant.*;
 
@@ -49,12 +50,30 @@ public final class ScannerRouteByChrome extends ScannerRoute {
         driver.findElement(By.xpath(BUTTON_SELECT_CARRIAGE)).click();
         delay();
         driver.findElement(By.xpath(BUTTON_ALL_VIEW)).click();
+        delay();
         scanCarriages(route);
         return null;
     }
 
     private void scanCarriages(Route route) {
+        int countCarriages = getCountCarriages();
+        for (int i = 0; i < countCarriages; i++) {
+            WebElement carriage = driver.findElement(By.xpath(CARRIAGES.get(i)));
+            carriage.click();
+            System.out.println(carriage.getText());
+            int countSeats = Integer.parseInt(carriage.getText().split("[ \n]")[2]);
+            for (int j = 0; j < countSeats; j++) {
+                WebElement seat = driver.findElement(By.xpath(SEATS.get(j)));
+                System.out.println(seat.getText());
+            }
+        }
 
+    }
+
+    private int getCountCarriages() {
+        WebElement carriagesElement = driver.findElement(By.xpath(CARRIAGES_ELEMENT));
+        String[] arr = carriagesElement.getText().split("\n");
+        return (int) Arrays.stream(arr).filter(s -> s.contains("ВАГОН")).count();
     }
 
     private void selectTrain(Route route) {
