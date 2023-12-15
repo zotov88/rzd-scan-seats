@@ -1,10 +1,7 @@
 package org.example.rzdscanseats.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,6 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "seats")
 @Builder
 public class Carriage {
 
@@ -25,8 +23,10 @@ public class Carriage {
 
     private int number;
 
+    private int countSeats;
+
     @Enumerated(EnumType.STRING)
-    private Type type;
+    private CarriageType type;
 
     @ManyToOne
     @JoinColumn(name = "train_id", nullable = false, foreignKey = @ForeignKey(name = "FK_CARRIAGE_TRAIN"))

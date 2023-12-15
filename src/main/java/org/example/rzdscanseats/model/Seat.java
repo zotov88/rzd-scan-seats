@@ -18,7 +18,12 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private Integer number;
+
+    private Double price;
+
+    @Enumerated(value = EnumType.STRING)
+    private SeatType type;
 
     @ManyToOne
     @JoinColumn(name = "carriage_id", nullable = false, foreignKey = @ForeignKey(name = "FK_SEAT_CARRIAGE"))

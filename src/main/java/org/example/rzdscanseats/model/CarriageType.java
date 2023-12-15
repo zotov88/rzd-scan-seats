@@ -1,9 +1,10 @@
 package org.example.rzdscanseats.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
-public enum Type {
+public enum CarriageType {
 
     SEAT("Сидячий"),
     PLATSKART("Плацкартный"),
@@ -13,7 +14,7 @@ public enum Type {
 
     private final String typeName;
 
-    Type(String typeName) {
+    CarriageType(String typeName) {
         this.typeName = typeName;
     }
 }

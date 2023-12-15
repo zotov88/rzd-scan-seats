@@ -1,13 +1,14 @@
 package org.example.rzdscanseats.service.util.scanroute;
 
-import org.example.rzdscanseats.model.Route;
+import org.example.rzdscanseats.model.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.springframework.security.core.parameters.P;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.springframework.data.util.TypeScanner;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Type;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
@@ -16,58 +17,110 @@ import static org.example.rzdscanseats.constant.RouteConstant.*;
 @Component
 public final class ScannerRouteByChrome extends ScannerRoute {
 
-    private ChromeDriver driver;
+    private FirefoxDriver driver;
     private WebElement cityFrom;
     private WebElement cityTo;
     private WebElement when;
     private WebElement findRouteButton;
     private WebElement dropDownFrom;
     private WebElement dropDownTo;
-    private WebElement train;
-    private WebElement carriage;
+    private WebElement trainElement;
+    private WebElement carriageElement;
     private WebElement selectTypeCarriageButton;
     WebElement allViewButton;
+    private Route route = new Route();
+    private Train train = new Train();
 
     @Override
-    public Route apply(Route route) {
+    public Route apply(Route tmpRoute) {
+//        System.out.println("NAME TRAIN------------ " + tmpRoute.getTrain().getName());
+        route = tmpRoute;
+        train.setName(route.getTrain().getName());
         ChromeOptions options = new ChromeOptions().addArguments("--headless");
-        driver = new ChromeDriver();
+        driver = new FirefoxDriver();
         driver.get(URL);
         initRoute();
-        cityFrom.sendKeys(route.getCityFrom());
+        cityFrom.sendKeys(tmpRoute.getCityFrom());
         delay();
         driver.findElement(By.xpath(DROP_DOWN_FROM)).click();
-        cityTo.sendKeys(route.getCityTo());
+        cityTo.sendKeys(tmpRoute.getCityTo());
         delay();
         driver.findElement(By.xpath(DROP_DOWN_TO)).click();
-        when.sendKeys(route.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+        when.sendKeys(tmpRoute.getDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
         findRouteButton.click();
         delay();
-        selectTrain(route);
+        selectTrain(tmpRoute);
         delay();
-        selectTypeCarriage(route);
+        selectTypeCarriage(tmpRoute);
         delay();
         driver.findElement(By.xpath(BUTTON_SELECT_CARRIAGE)).click();
         delay();
         driver.findElement(By.xpath(BUTTON_ALL_VIEW)).click();
         delay();
-        scanCarriages(route);
+        scanCarriages(tmpRoute);
         return null;
     }
 
     private void scanCarriages(Route route) {
         int countCarriages = getCountCarriages();
         for (int i = 0; i < countCarriages; i++) {
-            WebElement carriage = driver.findElement(By.xpath(CARRIAGES.get(i)));
-            carriage.click();
-            System.out.println(carriage.getText());
-            int countSeats = Integer.parseInt(carriage.getText().split("[ \n]")[2]);
-            for (int j = 0; j < countSeats; j++) {
-                WebElement seat = driver.findElement(By.xpath(SEATS.get(j)));
-                System.out.println(seat.getText());
+            WebElement carriageElement = driver.findElement(By.xpath(CARRIAGES.get(i)));
+            carriageElement.click();
+            Carriage carriage = initCarriage(carriageElement);
+            System.out.println(carriageElement.getText());
+            for (int j = 0; j < carriage.getCountSeats(); j++) {
+                WebElement seatElement = driver.findElement(By.xpath(SEATS.get(j)));
+                Seat seat = initSeat(seatElement, carriage);
+                carriage.getSeats().add(seat);
+//                System.out.println("********" + seat);
+//                System.out.println(seatElement.getText());
             }
+//            System.out.println("++++++++++++++++ВАГОН " + carriage);
+//            System.out.println("++++++++++++++++Места " + carriage.getSeats());
+            train.getCarriages().add(carriage);
+            System.out.println("++++++++++++++++Поезд " + train.getCarriages());
         }
 
+    }
+
+    private Seat initSeat(WebElement seatElement, Carriage carriage) {
+        return Seat.builder().
+                number(Integer.parseInt(seatElement.getText().split("[ \\[\\]\n]")[1])).
+                type(getSeatType(seatElement)).
+                price(Double.parseDouble(seatElement.getText().split("[ \\[\\]\n]")[4])).
+                carriage(carriage).
+                build();
+    }
+
+    private SeatType getSeatType(WebElement seatElement) {
+        String[] arr = seatElement.getText().split("[ \\[\\]\n]");
+        String typeText = arr.length == 7 ? arr[6] : arr[6] + " " + arr[7];
+        SeatType type;
+        switch (typeText) {
+            case "Нижнее" -> {
+                type = SeatType.BOTTOM;
+            }
+            case "Верхнее" -> {
+                type = SeatType.TOP;
+            }
+            case "Боковое верхнее" -> {
+                type = SeatType.TOP_SIDE;
+            }
+            case "Боковое нижнее" -> {
+                type = SeatType.BOTTOM_SIDE;
+            }
+            default -> type = null;
+        }
+        return type;
+    }
+
+    private Carriage initCarriage(WebElement carriageElement) {
+        return Carriage.builder().
+                number(Integer.parseInt(carriageElement.getText().split("[ \n]")[1])).
+                type(route.getTrain().getCarriages().get(0).getType()).
+                countSeats(Integer.parseInt(carriageElement.getText().split("[ \n]")[2])).
+                train(train).
+                build();
     }
 
     private int getCountCarriages() {
@@ -78,10 +131,10 @@ public final class ScannerRouteByChrome extends ScannerRoute {
 
     private void selectTrain(Route route) {
         for (String trainXPath : TRAINS) {
-            train = driver.findElement(By.xpath(trainXPath));
-            if (train.getText().contains(route.getTrain().getName())) {
-                driver.executeScript("arguments[0].scrollIntoView();", train);
-                train.click();
+            trainElement = driver.findElement(By.xpath(trainXPath));
+            if (trainElement.getText().contains(route.getTrain().getName())) {
+                driver.executeScript("arguments[0].scrollIntoView();", trainElement);
+                trainElement.click();
                 break;
             }
         }
@@ -90,10 +143,10 @@ public final class ScannerRouteByChrome extends ScannerRoute {
     private void selectTypeCarriage(Route route) {
         String type = route.getTrain().getCarriages().get(0).getType().getTypeName();
         for (String carriageType : CARRIAGE_TYPES) {
-            carriage = driver.findElement(By.xpath(carriageType));
-            if (carriage.getText().contains(type)) {
-                driver.executeScript("arguments[0].scrollIntoView();", carriage);
-                carriage.click();
+            carriageElement = driver.findElement(By.xpath(carriageType));
+            if (carriageElement.getText().contains(type)) {
+                driver.executeScript("arguments[0].scrollIntoView();", carriageElement);
+                carriageElement.click();
                 break;
             }
         }

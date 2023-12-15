@@ -3,7 +3,7 @@ package org.example.rzdscanseats.controller;
 import org.example.rzdscanseats.model.Carriage;
 import org.example.rzdscanseats.model.Route;
 import org.example.rzdscanseats.model.Train;
-import org.example.rzdscanseats.model.Type;
+import org.example.rzdscanseats.model.CarriageType;
 import org.example.rzdscanseats.service.RouteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +25,7 @@ public class RouteController {
         model.addAttribute("routeModel", new Route());
         model.addAttribute("trainModel", new Train());
         model.addAttribute("carriageModel", new Carriage());
-        model.addAttribute("typeCarriage", Type.values());
+        model.addAttribute("typeCarriage", CarriageType.values());
         return "routes/add";
     }
 
