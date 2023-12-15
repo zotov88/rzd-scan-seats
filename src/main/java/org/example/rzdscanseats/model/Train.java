@@ -1,10 +1,8 @@
 package org.example.rzdscanseats.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.checkerframework.checker.units.qual.C;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,6 +14,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "carriages")
 @Builder
 public class Train {
 
@@ -27,7 +26,7 @@ public class Train {
 
     @Builder.Default
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "train")
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
     private List<Carriage> carriages = new ArrayList<>();
 
     @OnDelete(action = OnDeleteAction.CASCADE)

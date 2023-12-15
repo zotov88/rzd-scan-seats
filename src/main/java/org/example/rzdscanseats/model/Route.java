@@ -1,10 +1,7 @@
 package org.example.rzdscanseats.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -13,6 +10,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "train")
 @Builder
 public class Route {
 
@@ -30,6 +28,6 @@ public class Route {
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_ROUTE_USER"))
     private User user;
 
-    @OneToOne(mappedBy = "route")
+    @OneToOne(mappedBy = "route", cascade = CascadeType.ALL)
     private Train train;
 }

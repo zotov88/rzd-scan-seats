@@ -5,6 +5,8 @@ import org.example.rzdscanseats.repository.RouteRepository;
 import org.example.rzdscanseats.service.util.scanroute.ScannerRoute;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RouteService {
 
@@ -19,5 +21,13 @@ public class RouteService {
 
     public void create(Route route) {
         routeRepository.save(scannerRoute.apply(route));
+    }
+
+    public List<Route> getRoutesByUserId(Long userId) {
+        return routeRepository.getRoutesByUserId(userId);
+    }
+
+    public void delete(Long routeId) {
+        routeRepository.deleteById(routeId);
     }
 }

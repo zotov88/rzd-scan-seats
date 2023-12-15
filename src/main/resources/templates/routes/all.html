@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>All routes</title>
+    <title>Маршруты</title>
 </head>
 <body>
-<h1>All routes</h1>
+<div layout:fragment="content">
+    <form method="GET">
+        <table class="table table-bordered table-sm mt-3">
+            <thead>
+            <tr>
+                <th scope="col">Откуда</th>
+                <th scope="col">Куда</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Тип вагона</th>
+                <th scope="col">Действие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="r : ${routes}">
+                <td th:text="${r.getCityFrom()}"></td>
+                <td th:text="${r.getCityTo()}"></td>
+                <td th:text="${r.date}"></td>
+                <td th:text="${r.getTrain().getCarriages().get(0).getType().getTypeName()}"></td>
+                <td>
+                    <a title="удалить" class="btn btn-sm btn-danger"
+                       th:href="'/routes/delete/' + ${r.getId()}"
+                       onclick="return confirm('Удалить товар и историю?')">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <br>
+</div>
 </body>
 </html>

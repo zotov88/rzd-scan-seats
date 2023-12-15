@@ -36,6 +36,7 @@ public final class ScannerRouteByChrome extends ScannerRoute {
 //        System.out.println("NAME TRAIN------------ " + tmpRoute.getTrain().getName());
         route = tmpRoute;
         train.setName(route.getTrain().getName());
+//        train.setRoute(route);
         ChromeOptions options = new ChromeOptions().addArguments("--headless");
         driver = new FirefoxDriver();
         driver.get(URL);
@@ -57,30 +58,26 @@ public final class ScannerRouteByChrome extends ScannerRoute {
         delay();
         driver.findElement(By.xpath(BUTTON_ALL_VIEW)).click();
         delay();
-        scanCarriages(tmpRoute);
-        return null;
+        scanCarriages();
+        System.out.println("++++++=ROUTE === " + route);
+        return route;
     }
 
-    private void scanCarriages(Route route) {
+    private void scanCarriages() {
         int countCarriages = getCountCarriages();
         for (int i = 0; i < countCarriages; i++) {
             WebElement carriageElement = driver.findElement(By.xpath(CARRIAGES.get(i)));
             carriageElement.click();
             Carriage carriage = initCarriage(carriageElement);
-            System.out.println(carriageElement.getText());
             for (int j = 0; j < carriage.getCountSeats(); j++) {
                 WebElement seatElement = driver.findElement(By.xpath(SEATS.get(j)));
                 Seat seat = initSeat(seatElement, carriage);
                 carriage.getSeats().add(seat);
-//                System.out.println("********" + seat);
-//                System.out.println(seatElement.getText());
             }
-//            System.out.println("++++++++++++++++ВАГОН " + carriage);
-//            System.out.println("++++++++++++++++Места " + carriage.getSeats());
             train.getCarriages().add(carriage);
-            System.out.println("++++++++++++++++Поезд " + train.getCarriages());
         }
-
+        train.setRoute(route);
+        route.setTrain(train);
     }
 
     private Seat initSeat(WebElement seatElement, Carriage carriage) {
