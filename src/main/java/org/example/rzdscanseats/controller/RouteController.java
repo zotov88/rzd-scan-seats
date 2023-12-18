@@ -4,6 +4,7 @@ import org.example.rzdscanseats.model.Carriage;
 import org.example.rzdscanseats.model.CarriageType;
 import org.example.rzdscanseats.model.Route;
 import org.example.rzdscanseats.model.Train;
+import org.example.rzdscanseats.service.CarriageService;
 import org.example.rzdscanseats.service.RouteService;
 import org.example.rzdscanseats.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,10 +19,14 @@ import java.util.List;
 public class RouteController {
 
     private final RouteService routeService;
+    private final CarriageService carriageService;
     private final UserService userService;
 
-    public RouteController(RouteService routeService, UserService userService) {
+    public RouteController(RouteService routeService,
+                           CarriageService carriageService,
+                           UserService userService) {
         this.routeService = routeService;
+        this.carriageService = carriageService;
         this.userService = userService;
     }
 
@@ -59,5 +64,16 @@ public class RouteController {
         routeService.delete(routeId);
         return "redirect:/routes/all/" +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
+    }
+
+    @GetMapping("/details/{routeId}")
+    public String details(@PathVariable Long routeId, Model model) {
+        // TODO создать мапу с типом мест в вагонах и количеством их мест
+        // TODO для каждого вагона для конкретного типа места передать минимальную цену билета
+        // TODO возможно реализовать через Map<Integer, Map<CarriageType, Integer>> (вагон, (тип, количество мест))
+        // TODO возможно реализовать через Map<Integer, Map<CarriageType, Double>> (вагон, (тип, минимальная цена типа места))
+
+        model.addAttribute("routeModel", routeService.getById(routeId));
+        return "routes/details";
     }
 }

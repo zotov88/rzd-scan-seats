@@ -16,7 +16,9 @@
                 <th scope="col">Куда</th>
                 <th scope="col">Дата</th>
                 <th scope="col">Тип вагона</th>
-                <th scope="col">Действие</th>
+                <th scope="col">Подробности</th>
+                <th scope="col">Обновить</th>
+                <th scope="col">Удалить</th>
             </tr>
             </thead>
             <tbody>
@@ -25,6 +27,12 @@
                 <td th:text="${r.getCityTo()}"></td>
                 <td th:text="${r.date}"></td>
                 <td th:text="${r.getTrain().getCarriages().get(0).getType().getTypeName()}"></td>
+                <td>
+                    <a title="подробности" class="btn btn-sm btn-info"
+                       th:href="'/routes/details/' + ${r.getId()}">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </a>
+                </td>
                 <td>
                     <a title="удалить" class="btn btn-sm btn-danger"
                        th:href="'/routes/delete/' + ${r.getId()}"

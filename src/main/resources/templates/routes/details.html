@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Маршруты</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form method="GET">
+        <table class="table table-bordered table-sm mt-3">
+            <thead>
+            <tr>
+                <th scope="col">Вагон</th>
+                <th scope="col">Нижние</th>
+                <!--                <th scope="col">Цена</th>-->
+                <th scope="col">Верхние</th>
+                <!--                <th scope="col">Цена</th>-->
+                <th scope="col">Боковые нижние</th>
+                <!--                <th scope="col">Цена</th>-->
+                <th scope="col">Боковые верхние</th>
+                <!--                <th scope="col">Цена</th>-->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${routeModel.getTrain().getCarriages()}">
+                <td th:text="${c.getNumber()}"></td>
+                <td th:text="${c.getSeats().size()}"></td>
+                <td th:text="${c.getSeats().size()}"></td>
+                <td th:text="${c.getSeats().size()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <br>
+</div>
+</body>
+</html>

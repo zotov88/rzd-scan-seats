@@ -26,3 +26,17 @@ where id = 1;
 
 create unique index users_login_idx on rzd.users(login);
 drop index rzd.users_login_idx;
+
+
+select *,
+       min(price) over(partition by type)
+from rzd.seats
+
+
+
+
+
+
+
+
+
