@@ -30,7 +30,10 @@ drop index rzd.users_login_idx;
 
 select *,
        min(price) over(partition by type)
-from rzd.seats
+from rzd.seats;
+
+delete from rzd.routes
+where id = 25;
 
 
 

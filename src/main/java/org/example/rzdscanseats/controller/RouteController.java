@@ -34,22 +34,21 @@ public class RouteController {
     @GetMapping("/add/{userId}")
     public String add(@PathVariable String userId,
                       Model model) {
-        model.addAttribute("routeModel", new Route());
-        model.addAttribute("trainModel", new Train());
-        model.addAttribute("carriageModel", new Carriage());
+        model.addAttribute("searchDataModel", new SearchData());
+//        model.addAttribute("trainModel", new Train());
+//        model.addAttribute("carriageModel", new Carriage());
         model.addAttribute("typeCarriage", CarriageType.values());
         return "routes/add";
     }
 
     @PostMapping("/add/{userId}")
-    public String add(@PathVariable String userId,
-                      @ModelAttribute("routeModel") Route tmpRoute,
-                      @ModelAttribute("trainModel") Train tmpTrain,
-                      @ModelAttribute("carriageModel") Carriage tmpCarriage) {
-        tmpTrain.getCarriages().add(tmpCarriage);
-        tmpRoute.setTrain(tmpTrain);
-        tmpRoute.setUser(userService.getById(Long.valueOf(userId)));
-        routeService.create(tmpRoute);
+    public String add(@PathVariable Long userId,
+                      @ModelAttribute("searchDataModel") SearchData searchData) {
+//        tmpTrain.getCarriages().add(tmpCarriage);
+//        tmpRoute.setTrain(tmpTrain);
+//        tmpRoute.setUser(userService.getById(Long.valueOf(userId)));
+        searchData.setUserId(userId);
+        routeService.create(searchData);
         return "redirect:/routes/all/" + userId;
     }
 
@@ -63,8 +62,19 @@ public class RouteController {
     @GetMapping("/update/{routeId}")
     public String update(@PathVariable Long routeId) {
         Route route = routeService.getById(routeId);
-        routeService.delete(routeId);
-        routeService.create(route);
+        SearchData data = SearchData.builder().
+                cityTo(route.getCityTo()).
+                cityFrom(route.getCityFrom()).
+                date(route.getDate()).
+                trainName(route.getTrain().getName()).
+                userId(route.getUser().getId()).
+                carriageType(route.getTrain().getCarriages().get(0).getType()).
+                build();
+        Train train = route.getTrain();
+        route.setTrain(null);
+        routeService.update(route);
+        trainService.delete(train.getId());
+        routeService.update(data, route);
         return "redirect:/routes/all/" +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
@@ -78,7 +88,6 @@ public class RouteController {
 
     @GetMapping("/details/{routeId}")
     public String details(@PathVariable Long routeId, Model model) {
-
         Route route = routeService.getById(routeId);
         List<FreePlaceInfo> freePlaceInfos = trainService.getFreePlacesInfo(route.getTrain());
         model.addAttribute("freePlaceInfos", freePlaceInfos);

@@ -34,7 +34,11 @@ public class TrainService {
         return freePlaceInfos;
     }
 
-    public void delete(Train train) {
-        trainRepository.delete(train);
+    public void delete(Long id) {
+        trainRepository.deleteById(id);
+    }
+
+    public void save(Train train) {
+        trainRepository.save(train);
     }
 }

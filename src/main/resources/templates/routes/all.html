@@ -16,9 +16,7 @@
                 <th scope="col">Куда</th>
                 <th scope="col">Дата</th>
                 <th scope="col">Тип вагона</th>
-                <th scope="col">Подробности</th>
-                <th scope="col">Обновить</th>
-                <th scope="col">Удалить</th>
+                <th scope="col">Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -32,14 +30,10 @@
                        th:href="'/routes/details/' + ${r.getId()}">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
-                </td>
-                <td>
                     <a title="обновить" class="btn btn-sm btn-upd"
                        th:href="'/routes/update/' + ${r.getId()}">
                         <i class="fa fa-spin fa-refresh" aria-hidden="true"></i>
                     </a>
-                </td>
-                <td>
                     <a title="удалить" class="btn btn-sm btn-danger"
                        th:href="'/routes/delete/' + ${r.getId()}"
                        onclick="return confirm('Удалить товар и историю?')">

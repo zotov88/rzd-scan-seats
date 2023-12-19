@@ -18,7 +18,13 @@ public final class ScannerRouteByFirefox extends ScannerRoute {
     private FirefoxDriver driver;
 
     @Override
-    public Route apply(Route route) {
+    public Route apply(SearchData data) {
+        Carriage carriage = Carriage.builder().type(data.getCarriageType()).build();
+        Train train = Train.builder().name(data.getTrainName()).build();
+        train.getCarriages().add(carriage);
+        Route route = Route.builder().cityFrom(data.getCityFrom()).cityTo(data.getCityTo()).date(data.getDate()).build();
+        route.setTrain(train);
+
         driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless"));
         driver.get(URL);
         driver.findElement(By.id(CITI_FROM_ID)).sendKeys(route.getCityFrom());
