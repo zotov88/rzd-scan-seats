@@ -15,10 +15,11 @@ import static org.example.rzdscanseats.constant.RouteConstant.*;
 @Component
 public final class ScannerRouteByFirefox extends ScannerRoute {
 
-    private final FirefoxDriver driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless"));
+    private FirefoxDriver driver;
 
     @Override
     public Route apply(Route route) {
+        driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless"));
         driver.get(URL);
         driver.findElement(By.id(CITI_FROM_ID)).sendKeys(route.getCityFrom());
         delay(2);
@@ -34,7 +35,7 @@ public final class ScannerRouteByFirefox extends ScannerRoute {
         selectTypeCarriage(route);
         delay(2);
         driver.findElement(By.xpath(BUTTON_SELECT_CARRIAGE)).click();
-        delay(1);
+        delay(2);
         driver.findElement(By.xpath(BUTTON_ALL_VIEW)).click();
         delay(1);
         scanCarriages(route);

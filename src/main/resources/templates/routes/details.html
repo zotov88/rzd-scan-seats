@@ -13,22 +13,29 @@
             <thead>
             <tr>
                 <th scope="col">Вагон</th>
+                <th scope="col">Всего</th>
                 <th scope="col">Нижние</th>
-                <!--                <th scope="col">Цена</th>-->
+                <th scope="col">Цена</th>
                 <th scope="col">Верхние</th>
-                <!--                <th scope="col">Цена</th>-->
+                <th scope="col">Цена</th>
                 <th scope="col">Боковые нижние</th>
-                <!--                <th scope="col">Цена</th>-->
+                <th scope="col">Цена</th>
                 <th scope="col">Боковые верхние</th>
-                <!--                <th scope="col">Цена</th>-->
+                <th scope="col">Цена</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="c : ${routeModel.getTrain().getCarriages()}">
-                <td th:text="${c.getNumber()}"></td>
-                <td th:text="${c.getSeats().size()}"></td>
-                <td th:text="${c.getSeats().size()}"></td>
-                <td th:text="${c.getSeats().size()}"></td>
+            <tr th:each="f : ${freePlaceInfos}">
+                <td th:text="${f.getCarriageNumber()}"></td>
+                <td th:text="${f.getAllSeats()}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM)}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP)}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM_SIDE)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM_SIDE)}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP_SIDE)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP_SIDE)}"></td>
             </tr>
             </tbody>
         </table>

@@ -1,11 +1,9 @@
 package org.example.rzdscanseats.controller;
 
-import org.example.rzdscanseats.model.Carriage;
-import org.example.rzdscanseats.model.CarriageType;
-import org.example.rzdscanseats.model.Route;
-import org.example.rzdscanseats.model.Train;
+import org.example.rzdscanseats.model.*;
 import org.example.rzdscanseats.service.CarriageService;
 import org.example.rzdscanseats.service.RouteService;
+import org.example.rzdscanseats.service.TrainService;
 import org.example.rzdscanseats.service.UserService;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,13 +17,16 @@ import java.util.List;
 public class RouteController {
 
     private final RouteService routeService;
+    private final TrainService trainService;
     private final CarriageService carriageService;
     private final UserService userService;
 
     public RouteController(RouteService routeService,
+                           TrainService trainService,
                            CarriageService carriageService,
                            UserService userService) {
         this.routeService = routeService;
+        this.trainService = trainService;
         this.carriageService = carriageService;
         this.userService = userService;
     }
@@ -59,8 +60,17 @@ public class RouteController {
         return "routes/all";
     }
 
+    @GetMapping("/update/{routeId}")
+    public String update(@PathVariable Long routeId) {
+        Route route = routeService.getById(routeId);
+        routeService.delete(routeId);
+        routeService.create(route);
+        return "redirect:/routes/all/" +
+                userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
+    }
+
     @GetMapping("/delete/{routeId}")
-    public String all(@PathVariable Long routeId) {
+    public String delete(@PathVariable Long routeId) {
         routeService.delete(routeId);
         return "redirect:/routes/all/" +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
@@ -68,12 +78,10 @@ public class RouteController {
 
     @GetMapping("/details/{routeId}")
     public String details(@PathVariable Long routeId, Model model) {
-        // TODO создать мапу с типом мест в вагонах и количеством их мест
-        // TODO для каждого вагона для конкретного типа места передать минимальную цену билета
-        // TODO возможно реализовать через Map<Integer, Map<CarriageType, Integer>> (вагон, (тип, количество мест))
-        // TODO возможно реализовать через Map<Integer, Map<CarriageType, Double>> (вагон, (тип, минимальная цена типа места))
 
-        model.addAttribute("routeModel", routeService.getById(routeId));
+        Route route = routeService.getById(routeId);
+        List<FreePlaceInfo> freePlaceInfos = trainService.getFreePlacesInfo(route.getTrain());
+        model.addAttribute("freePlaceInfos", freePlaceInfos);
         return "routes/details";
     }
 }

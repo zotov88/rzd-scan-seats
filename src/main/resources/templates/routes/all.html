@@ -34,6 +34,12 @@
                     </a>
                 </td>
                 <td>
+                    <a title="обновить" class="btn btn-sm btn-upd"
+                       th:href="'/routes/update/' + ${r.getId()}">
+                        <i class="fa fa-spin fa-refresh" aria-hidden="true"></i>
+                    </a>
+                </td>
+                <td>
                     <a title="удалить" class="btn btn-sm btn-danger"
                        th:href="'/routes/delete/' + ${r.getId()}"
                        onclick="return confirm('Удалить товар и историю?')">
