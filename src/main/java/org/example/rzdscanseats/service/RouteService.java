@@ -15,17 +15,17 @@ import java.util.List;
 public class RouteService {
 
     private final UserService userService;
-    private final RouteRepository routeRepository;
     private final TrainService trainService;
+    private final RouteRepository routeRepository;
     private final ScannerRoute scannerRoute;
 
     public RouteService(UserService userService,
-                        RouteRepository routeRepository,
                         TrainService trainService,
+                        RouteRepository routeRepository,
                         ScannerRoute scannerRoute) {
         this.userService = userService;
-        this.routeRepository = routeRepository;
         this.trainService = trainService;
+        this.routeRepository = routeRepository;
         this.scannerRoute = scannerRoute;
     }
 
@@ -36,14 +36,22 @@ public class RouteService {
         routeRepository.save(route);
     }
 
-    public void update(Route route) {
-        routeRepository.save(route);
-    }
-
-    public void update(SearchData data, Route route) {
-        Train train = scannerRoute.apply(data).getTrain();
-        train.setRoute(route);
-        route.setTrain(train);
+    public void update(Long routeId) {
+        Route route = getById(routeId);
+        SearchData data = SearchData.builder().
+                cityTo(route.getCityTo()).
+                cityFrom(route.getCityFrom()).
+                date(route.getDate()).
+                trainName(route.getTrain().getName()).
+                userId(route.getUser().getId()).
+                carriageType(route.getTrain().getCarriages().get(0).getType()).
+                build();
+        Train oldTrain = route.getTrain();
+        route.setTrain(null);
+        trainService.delete(oldTrain.getId());
+        Train newTrain = scannerRoute.apply(data).getTrain();
+        newTrain.setRoute(route);
+        route.setTrain(newTrain);
         routeRepository.save(route);
     }
 
@@ -59,4 +67,26 @@ public class RouteService {
     public void delete(Long routeId) {
         routeRepository.deleteById(routeId);
     }
+
+    public List<Long> getDistinctByUserId() {
+        return routeRepository.getDistinctByUserId();
+    }
+
+    public void checkAllRoutes() {
+        for (Long userId : getDistinctByUserId()) {
+            checkRoutes(getRoutes(userId), userId);
+        }
+    }
+
+    private List<Route> getRoutes(Long userId) {
+        return routeRepository.getRoutesByUserId(userId);
+    }
+
+    private void checkRoutes(List<Route> routes, Long userId) {
+        for (Route route : routes) {
+
+        }
+    }
+
+
 }

@@ -35,8 +35,6 @@ public class RouteController {
     public String add(@PathVariable String userId,
                       Model model) {
         model.addAttribute("searchDataModel", new SearchData());
-//        model.addAttribute("trainModel", new Train());
-//        model.addAttribute("carriageModel", new Carriage());
         model.addAttribute("typeCarriage", CarriageType.values());
         return "routes/add";
     }
@@ -44,9 +42,6 @@ public class RouteController {
     @PostMapping("/add/{userId}")
     public String add(@PathVariable Long userId,
                       @ModelAttribute("searchDataModel") SearchData searchData) {
-//        tmpTrain.getCarriages().add(tmpCarriage);
-//        tmpRoute.setTrain(tmpTrain);
-//        tmpRoute.setUser(userService.getById(Long.valueOf(userId)));
         searchData.setUserId(userId);
         routeService.create(searchData);
         return "redirect:/routes/all/" + userId;
@@ -61,20 +56,7 @@ public class RouteController {
 
     @GetMapping("/update/{routeId}")
     public String update(@PathVariable Long routeId) {
-        Route route = routeService.getById(routeId);
-        SearchData data = SearchData.builder().
-                cityTo(route.getCityTo()).
-                cityFrom(route.getCityFrom()).
-                date(route.getDate()).
-                trainName(route.getTrain().getName()).
-                userId(route.getUser().getId()).
-                carriageType(route.getTrain().getCarriages().get(0).getType()).
-                build();
-        Train train = route.getTrain();
-        route.setTrain(null);
-        routeService.update(route);
-        trainService.delete(train.getId());
-        routeService.update(data, route);
+        routeService.update(routeId);
         return "redirect:/routes/all/" +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }

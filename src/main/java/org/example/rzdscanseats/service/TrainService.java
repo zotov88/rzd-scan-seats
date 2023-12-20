@@ -37,8 +37,4 @@ public class TrainService {
     public void delete(Long id) {
         trainRepository.deleteById(id);
     }
-
-    public void save(Train train) {
-        trainRepository.save(train);
-    }
 }
