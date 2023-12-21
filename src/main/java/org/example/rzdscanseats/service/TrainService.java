@@ -1,6 +1,9 @@
 package org.example.rzdscanseats.service;
 
-import org.example.rzdscanseats.model.*;
+import org.example.rzdscanseats.model.Carriage;
+import org.example.rzdscanseats.model.FreePlaceInfo;
+import org.example.rzdscanseats.model.SeatType;
+import org.example.rzdscanseats.model.Train;
 import org.example.rzdscanseats.repository.TrainRepository;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +37,10 @@ public class TrainService {
         return freePlaceInfos;
     }
 
-    public void delete(Long id) {
-        trainRepository.deleteById(id);
+    public void delete(Train train) {
+        System.out.println("-------------delete1");
+        System.out.println("ID " + train.getId());
+        trainRepository.delete(train);
+        System.out.println("-------------delete2");
     }
 }

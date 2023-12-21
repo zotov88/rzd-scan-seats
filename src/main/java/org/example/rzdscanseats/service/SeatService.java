@@ -3,7 +3,6 @@ package org.example.rzdscanseats.service;
 import org.example.rzdscanseats.model.Carriage;
 import org.example.rzdscanseats.model.Seat;
 import org.example.rzdscanseats.model.SeatType;
-import org.example.rzdscanseats.repository.SeatRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -11,12 +10,6 @@ import java.util.Map;
 
 @Service
 public class SeatService {
-
-    private final SeatRepository seatRepository;
-
-    public SeatService(SeatRepository seatRepository) {
-        this.seatRepository = seatRepository;
-    }
 
     public Map<SeatType, Integer> getCountPlacesMap(Carriage carriage) {
         Map<SeatType, Integer> seatMap = new HashMap<>();

@@ -1,7 +1,9 @@
 package org.example.rzdscanseats.controller;
 
-import org.example.rzdscanseats.model.*;
-import org.example.rzdscanseats.service.CarriageService;
+import org.example.rzdscanseats.model.CarriageType;
+import org.example.rzdscanseats.model.FreePlaceInfo;
+import org.example.rzdscanseats.model.Route;
+import org.example.rzdscanseats.model.SearchData;
 import org.example.rzdscanseats.service.RouteService;
 import org.example.rzdscanseats.service.TrainService;
 import org.example.rzdscanseats.service.UserService;
@@ -18,16 +20,13 @@ public class RouteController {
 
     private final RouteService routeService;
     private final TrainService trainService;
-    private final CarriageService carriageService;
     private final UserService userService;
 
     public RouteController(RouteService routeService,
                            TrainService trainService,
-                           CarriageService carriageService,
                            UserService userService) {
         this.routeService = routeService;
         this.trainService = trainService;
-        this.carriageService = carriageService;
         this.userService = userService;
     }
 
@@ -75,4 +74,12 @@ public class RouteController {
         model.addAttribute("freePlaceInfos", freePlaceInfos);
         return "routes/details";
     }
+
+    @GetMapping("/checkall")
+    public String checkAll() {
+        routeService.checkAllRoutes();
+        return "redirect:/routes/all/" +
+                userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
+    }
+
 }

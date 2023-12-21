@@ -35,6 +35,12 @@ from rzd.seats;
 delete from rzd.routes
 where id = 25;
 
+truncate rzd.routes cascade;
+
+
+
+delete from rzd.trains where id = 30;
+
 
 
 

@@ -2,7 +2,6 @@ package org.example.rzdscanseats.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -26,7 +25,7 @@ public class Train {
 
     @Builder.Default
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "train", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Carriage> carriages = new ArrayList<>();
 
     @OnDelete(action = OnDeleteAction.CASCADE)

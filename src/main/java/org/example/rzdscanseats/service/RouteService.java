@@ -1,15 +1,15 @@
 package org.example.rzdscanseats.service;
 
-import org.example.rzdscanseats.model.Route;
-import org.example.rzdscanseats.model.SearchData;
-import org.example.rzdscanseats.model.Train;
-import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.model.*;
 import org.example.rzdscanseats.repository.RouteRepository;
+import org.example.rzdscanseats.service.util.notification.SenderNotifications;
 import org.example.rzdscanseats.service.util.scanroute.ScannerRoute;
 import org.openqa.selenium.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class RouteService {
@@ -18,15 +18,18 @@ public class RouteService {
     private final TrainService trainService;
     private final RouteRepository routeRepository;
     private final ScannerRoute scannerRoute;
+    private final SenderNotifications senderNotifications;
 
     public RouteService(UserService userService,
                         TrainService trainService,
                         RouteRepository routeRepository,
-                        ScannerRoute scannerRoute) {
+                        ScannerRoute scannerRoute,
+                        SenderNotifications senderNotifications) {
         this.userService = userService;
         this.trainService = trainService;
         this.routeRepository = routeRepository;
         this.scannerRoute = scannerRoute;
+        this.senderNotifications = senderNotifications;
     }
 
     public void create(SearchData data) {
@@ -48,7 +51,7 @@ public class RouteService {
                 build();
         Train oldTrain = route.getTrain();
         route.setTrain(null);
-        trainService.delete(oldTrain.getId());
+        trainService.delete(oldTrain);
         Train newTrain = scannerRoute.apply(data).getTrain();
         newTrain.setRoute(route);
         route.setTrain(newTrain);
@@ -68,24 +71,44 @@ public class RouteService {
         routeRepository.deleteById(routeId);
     }
 
-    public List<Long> getDistinctByUserId() {
-        return routeRepository.getDistinctByUserId();
-    }
-
     public void checkAllRoutes() {
         for (Long userId : getDistinctByUserId()) {
-            checkRoutes(getRoutes(userId), userId);
+            checkRoutes(getRoutes(userId));
         }
+    }
+
+    public List<Long> getDistinctByUserId() {
+        return routeRepository.getDistinctByUserId();
     }
 
     private List<Route> getRoutes(Long userId) {
         return routeRepository.getRoutesByUserId(userId);
     }
 
-    private void checkRoutes(List<Route> routes, Long userId) {
+    private void checkRoutes(List<Route> routes) {
         for (Route route : routes) {
-
+            update(route.getId());
+            senderNotifications.sendAll(userService.getById(route.getUser().getId()), createMessage(route));
         }
+    }
+
+    private String createMessage(Route route) {
+        Map<SeatType, Integer> seatInfo = new HashMap<>();
+        StringBuilder sb = new StringBuilder();
+        sb.append("Поезд ").append(route.getTrain().getName()).
+                append(" ").append(route.getDate()).append("\n");
+        for (FreePlaceInfo placeInfo : trainService.getFreePlacesInfo(route.getTrain())) {
+            for (SeatType type : placeInfo.getCountPlacesMap().keySet()) {
+                if (!seatInfo.containsKey(type)) {
+                    seatInfo.put(type, 0);
+                }
+                seatInfo.put(type, placeInfo.getCountPlacesMap().get(type) + seatInfo.get(type));
+            }
+        }
+        for (SeatType type : seatInfo.keySet()) {
+            sb.append(type.getDescription()).append(": ").append(seatInfo.get(type)).append("\n");
+        }
+        return sb.toString();
     }
 
 
