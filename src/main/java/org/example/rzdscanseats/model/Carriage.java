@@ -34,6 +34,6 @@ public class Carriage {
 
     @Builder.Default
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "carriage", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "carriage", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Seat> seats = new ArrayList<>();
 }

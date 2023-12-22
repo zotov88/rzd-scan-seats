@@ -28,5 +28,4 @@ public class Seat {
     @ManyToOne
     @JoinColumn(name = "carriage_id", nullable = false, foreignKey = @ForeignKey(name = "FK_SEAT_CARRIAGE"))
     private Carriage carriage;
-
 }

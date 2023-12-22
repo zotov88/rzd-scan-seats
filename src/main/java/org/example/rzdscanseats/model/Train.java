@@ -37,5 +37,4 @@ public class Train {
         route.setTrain(this);
         this.route = route;
     }
-
 }

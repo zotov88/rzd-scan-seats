@@ -47,6 +47,6 @@ public class User {
 
     @Builder.Default
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Route> routes = new ArrayList<>();
 }

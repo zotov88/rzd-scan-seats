@@ -1,7 +1,9 @@
 package org.example.rzdscanseats.service;
 
+import jakarta.transaction.Transactional;
 import org.example.rzdscanseats.model.*;
 import org.example.rzdscanseats.repository.RouteRepository;
+import org.example.rzdscanseats.repository.TrainRepository;
 import org.example.rzdscanseats.service.util.notification.SenderNotifications;
 import org.example.rzdscanseats.service.util.scanroute.ScannerRoute;
 import org.openqa.selenium.NotFoundException;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Transactional
 public class RouteService {
 
     private final UserService userService;
@@ -19,17 +22,19 @@ public class RouteService {
     private final RouteRepository routeRepository;
     private final ScannerRoute scannerRoute;
     private final SenderNotifications senderNotifications;
+    private final TrainRepository trainRepository;
 
     public RouteService(UserService userService,
                         TrainService trainService,
                         RouteRepository routeRepository,
                         ScannerRoute scannerRoute,
-                        SenderNotifications senderNotifications) {
+                        SenderNotifications senderNotifications, TrainRepository trainRepository) {
         this.userService = userService;
         this.trainService = trainService;
         this.routeRepository = routeRepository;
         this.scannerRoute = scannerRoute;
         this.senderNotifications = senderNotifications;
+        this.trainRepository = trainRepository;
     }
 
     public void create(SearchData data) {
@@ -52,6 +57,7 @@ public class RouteService {
         Train oldTrain = route.getTrain();
         route.setTrain(null);
         trainService.delete(oldTrain);
+//        trainRepository.delete(oldTrain);
         Train newTrain = scannerRoute.apply(data).getTrain();
         newTrain.setRoute(route);
         route.setTrain(newTrain);
@@ -71,14 +77,14 @@ public class RouteService {
         routeRepository.deleteById(routeId);
     }
 
+    public List<Long> getDistinctByUserId() {
+        return routeRepository.getDistinctByUserId();
+    }
+
     public void checkAllRoutes() {
         for (Long userId : getDistinctByUserId()) {
             checkRoutes(getRoutes(userId));
         }
-    }
-
-    public List<Long> getDistinctByUserId() {
-        return routeRepository.getDistinctByUserId();
     }
 
     private List<Route> getRoutes(Long userId) {

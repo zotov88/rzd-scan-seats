@@ -13,8 +13,7 @@ public class Scheduler {
         this.routeService = routeService;
     }
 
-//    @Scheduled(cron = "0 0 9-21/3 * * *")
-    @Scheduled(cron = "0 */2 * * * *")
+    @Scheduled(cron = "0 0 9-21/3 * * *")
     public void updateRouteListAllUsers() {
         routeService.checkAllRoutes();
     }

@@ -38,9 +38,6 @@ public class TrainService {
     }
 
     public void delete(Train train) {
-        System.out.println("-------------delete1");
-        System.out.println("ID " + train.getId());
-        trainRepository.delete(train);
-        System.out.println("-------------delete2");
+        trainRepository.myDelete(train.getId());
     }
 }

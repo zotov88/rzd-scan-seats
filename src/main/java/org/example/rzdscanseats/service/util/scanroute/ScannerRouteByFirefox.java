@@ -4,6 +4,7 @@ import org.example.rzdscanseats.model.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.stereotype.Component;
 
 import java.time.format.DateTimeFormatter;
@@ -23,8 +24,7 @@ public final class ScannerRouteByFirefox extends ScannerRoute {
         train.getCarriages().add(carriage);
         Route route = Route.builder().cityFrom(data.getCityFrom()).cityTo(data.getCityTo()).date(data.getDate()).build();
         route.setTrain(train);
-//        driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless"));
-        driver = new FirefoxDriver();
+        driver = new FirefoxDriver(new FirefoxOptions().addArguments("--headless"));
         driver.get(URL);
         driver.findElement(By.id(CITI_FROM_ID)).sendKeys(route.getCityFrom());
         delay(3);
