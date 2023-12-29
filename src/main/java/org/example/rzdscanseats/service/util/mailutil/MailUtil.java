@@ -6,7 +6,7 @@ public class MailUtil {
 
     private MailUtil() {}
 
-    public static SimpleMailMessage createMailMessage(final String email,
+    public static SimpleMailMessage createMailMessage(final String email, 
                                                       final String subject,
                                                       final String text) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -14,5 +14,6 @@ public class MailUtil {
         message.setSubject(subject);
         message.setText(text);
         return message;
+        
     }
 }

@@ -3,7 +3,6 @@ package org.example.rzdscanseats.service;
 import jakarta.transaction.Transactional;
 import org.example.rzdscanseats.model.*;
 import org.example.rzdscanseats.repository.RouteRepository;
-import org.example.rzdscanseats.repository.TrainRepository;
 import org.example.rzdscanseats.service.util.notification.SenderNotifications;
 import org.example.rzdscanseats.service.util.scanroute.ScannerRoute;
 import org.openqa.selenium.NotFoundException;
@@ -22,19 +21,17 @@ public class RouteService {
     private final RouteRepository routeRepository;
     private final ScannerRoute scannerRoute;
     private final SenderNotifications senderNotifications;
-    private final TrainRepository trainRepository;
 
     public RouteService(UserService userService,
                         TrainService trainService,
                         RouteRepository routeRepository,
                         ScannerRoute scannerRoute,
-                        SenderNotifications senderNotifications, TrainRepository trainRepository) {
+                        SenderNotifications senderNotifications) {
         this.userService = userService;
         this.trainService = trainService;
         this.routeRepository = routeRepository;
         this.scannerRoute = scannerRoute;
         this.senderNotifications = senderNotifications;
-        this.trainRepository = trainRepository;
     }
 
     public void create(SearchData data) {
@@ -57,7 +54,6 @@ public class RouteService {
         Train oldTrain = route.getTrain();
         route.setTrain(null);
         trainService.delete(oldTrain);
-//        trainRepository.delete(oldTrain);
         Train newTrain = scannerRoute.apply(data).getTrain();
         newTrain.setRoute(route);
         route.setTrain(newTrain);

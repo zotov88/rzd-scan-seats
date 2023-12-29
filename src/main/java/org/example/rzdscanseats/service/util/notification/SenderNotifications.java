@@ -16,7 +16,7 @@ public final class SenderNotifications {
 
     public void sendAll(User user, String message) {
         for (NotificationProxy notifier : notifiers) {
-            notifier.send(user, message);
+            notifier.sendMessage(user, message);
         }
     }
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class TelegramNotificationProxy implements NotificationProxy {
 
     @Override
-    public void send(User user, String message) {
+    public void sendMessage(User user, String message) {
         TelegramBot bot = new TelegramBot(user.getTgBotToken());
         bot.execute(new SendMessage(user.getTgChatId(), message));
     }

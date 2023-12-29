@@ -5,5 +5,5 @@ import org.example.rzdscanseats.model.User;
 
 public interface NotificationProxy {
 
-    void send(User user, String message);
+    void sendMessage(User user, String message);
 }
