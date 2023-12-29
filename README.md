@@ -1,0 +1,1 @@
+![bd_diagram.png](src%2Fmain%2Fresources%2Fbd_diagram.png)
