@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.function.Function;
 
-
 public abstract class ScannerRoute implements Function<SearchData, Route> {
 
     protected Seat initSeat(WebElement seatElement, Carriage carriage) {
@@ -18,23 +17,16 @@ public abstract class ScannerRoute implements Function<SearchData, Route> {
     }
 
     protected SeatType getSeatType(WebElement seatElement) {
-        String[] arr = seatElement.getText().split("[ \\[\\]\n]");
-        String typeText = arr.length == 7 ? arr[6] : arr[6] + " " + arr[7];
-        SeatType type;
-        switch (typeText) {
-            case "Нижнее" -> {
-                type = SeatType.BOTTOM;
-            }
-            case "Верхнее" -> {
-                type = SeatType.TOP;
-            }
-            case "Боковое верхнее" -> {
-                type = SeatType.TOP_SIDE;
-            }
-            case "Боковое нижнее" -> {
-                type = SeatType.BOTTOM_SIDE;
-            }
-            default -> type = null;
+        String seatInfo = seatElement.getText();
+        SeatType type = null;
+        if (seatInfo.contains("Боковое верхнее")) {
+            type = SeatType.TOP_SIDE;
+        } else if (seatInfo.contains("Боковое нижнее")) {
+            type = SeatType.BOTTOM_SIDE;
+        } else if (seatInfo.contains("Нижнее") || seatInfo.contains("Последнее купе (отсек), нижнее")) {
+            type = SeatType.BOTTOM;
+        } else if (seatInfo.contains("Верхнее")) {
+            type = SeatType.TOP;
         }
         return type;
     }
