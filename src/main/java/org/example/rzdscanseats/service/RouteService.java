@@ -38,6 +38,7 @@ public class RouteService {
         User user = userService.getById(data.getUserId());
         Route route = scannerRoute.apply(data);
         route.setUser(user);
+        route.setNotificatorType(NotificatorType.OFF);
         routeRepository.save(route);
     }
 
@@ -112,6 +113,4 @@ public class RouteService {
         }
         return sb.toString();
     }
-
-
 }

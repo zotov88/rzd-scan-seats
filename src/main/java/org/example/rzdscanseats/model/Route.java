@@ -30,4 +30,7 @@ public class Route {
 
     @OneToOne(mappedBy = "route", cascade = CascadeType.ALL)
     private Train train;
+
+    @Enumerated(value = EnumType.STRING)
+    private NotificatorType notificatorType;
 }

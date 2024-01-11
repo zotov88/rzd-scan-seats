@@ -22,7 +22,7 @@ public class Seat {
 
     private Double price;
 
-    @Enumerated(value = EnumType.STRING)
+    @Enumerated(EnumType.STRING)
     private SeatType type;
 
     @ManyToOne

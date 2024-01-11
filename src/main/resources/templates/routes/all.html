@@ -29,7 +29,8 @@
                 <td th:text="${r.getTrain().getCarriages().get(0).getType().getTypeName()}"></td>
                 <td>
                     <a title="подробности" class="btn btn-sm btn-info"
-                       th:href="'/routes/details/' + ${r.getId()}">
+                       th:href="'/routes/details/' + ${r.getId()}"
+                       target="_blank">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
                     <a title="обновить" class="btn btn-sm btn-upd"
@@ -43,6 +44,10 @@
                     </a>
                     <a title="оповестить" class="btn btn-sm btn-danger"
                        th:href="'/routes/checkall'">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </a>
+                    <a title="опция оповещения" class="btn btn-sm btn-danger"
+                       th:href="'/routes/notification'">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
                 </td>

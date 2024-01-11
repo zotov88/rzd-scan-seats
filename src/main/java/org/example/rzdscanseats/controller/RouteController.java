@@ -1,9 +1,6 @@
 package org.example.rzdscanseats.controller;
 
-import org.example.rzdscanseats.model.CarriageType;
-import org.example.rzdscanseats.model.FreePlaceInfo;
-import org.example.rzdscanseats.model.Route;
-import org.example.rzdscanseats.model.SearchData;
+import org.example.rzdscanseats.model.*;
 import org.example.rzdscanseats.service.RouteService;
 import org.example.rzdscanseats.service.TrainService;
 import org.example.rzdscanseats.service.UserService;
@@ -81,5 +78,13 @@ public class RouteController {
         return "redirect:/routes/all/" +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
+
+    @GetMapping("/notification")
+    public String notificationOptions(Model model) {
+        model.addAttribute("typeNotification", NotificatorType.values());
+        return "routes/notification";
+    }
+
+    //TODO сделать страницу, которая будет отображать текущий уровень оповещения и при необходимости можно будет менять его
 
 }
