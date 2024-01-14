@@ -42,6 +42,10 @@ public class RouteService {
         routeRepository.save(route);
     }
 
+    public void updateEnt(Route route) {
+        routeRepository.save(route);
+    }
+
     public void update(Long routeId) {
         Route route = getById(routeId);
         SearchData data = SearchData.builder().

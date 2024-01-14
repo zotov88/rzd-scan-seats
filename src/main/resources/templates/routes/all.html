@@ -17,6 +17,7 @@
                 <th scope="col">Вагон</th>
                 <th scope="col">Дата</th>
                 <th scope="col">Поезд</th>
+                <th scope="col">Оповещение</th>
                 <th scope="col">Действия</th>
             </tr>
             </thead>
@@ -27,6 +28,7 @@
                 <td th:text="${r.getTrain().getName()}"></td>
                 <td th:text="${r.date}"></td>
                 <td th:text="${r.getTrain().getCarriages().get(0).getType().getTypeName()}"></td>
+                <td th:text="${r.getNotificatorType().getTypeName()}"></td>
                 <td>
                     <a title="подробности" class="btn btn-sm btn-info"
                        th:href="'/routes/details/' + ${r.getId()}"
@@ -46,9 +48,9 @@
                        th:href="'/routes/checkall'">
                         <i class="fa fa-trash" aria-hidden="true"></i>
                     </a>
-                    <a title="опция оповещения" class="btn btn-sm btn-danger"
-                       th:href="'/routes/notification'">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    <a title="опция оповещения" class="btn btn-sm btn-warning"
+                       th:href="'/routes/notification/' + ${r.getId()}">
+                        <i class="fa fa-bell-o" aria-hidden="true"></i>
                     </a>
                 </td>
             </tr>

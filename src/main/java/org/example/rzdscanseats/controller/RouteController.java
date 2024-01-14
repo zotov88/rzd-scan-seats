@@ -44,7 +44,8 @@ public class RouteController {
     }
 
     @GetMapping("/all/{userId}")
-    public String all(@PathVariable Long userId, Model model) {
+    public String all(@PathVariable Long userId,
+                      Model model) {
         List<Route> routes = routeService.getRoutesByUserId(userId);
         model.addAttribute("routes", routes);
         return "routes/all";
@@ -65,7 +66,8 @@ public class RouteController {
     }
 
     @GetMapping("/details/{routeId}")
-    public String details(@PathVariable Long routeId, Model model) {
+    public String details(@PathVariable Long routeId,
+                          Model model) {
         Route route = routeService.getById(routeId);
         List<FreePlaceInfo> freePlaceInfos = trainService.getFreePlacesInfo(route.getTrain());
         model.addAttribute("freePlaceInfos", freePlaceInfos);
@@ -79,10 +81,22 @@ public class RouteController {
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
-    @GetMapping("/notification")
-    public String notificationOptions(Model model) {
+    @GetMapping("/notification/{routeId}")
+    public String notificationOptions(@PathVariable Long routeId,
+                                      Model model) {
         model.addAttribute("typeNotification", NotificatorType.values());
+        model.addAttribute("route", routeService.getById(routeId));
         return "routes/notification";
+    }
+
+    @PostMapping("/notification/update/{routeId}")
+    public String notificationUpdate(@ModelAttribute("typeNotification") Route routeTN,
+                                     @PathVariable Long routeId) {
+        Route route = routeService.getById(routeId);
+        route.setNotificatorType(routeTN.getNotificatorType());
+        routeService.updateEnt(route);
+        return "redirect:/routes/all/" +
+                userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
     //TODO сделать страницу, которая будет отображать текущий уровень оповещения и при необходимости можно будет менять его

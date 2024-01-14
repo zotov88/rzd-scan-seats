@@ -1,5 +1,10 @@
 package org.example.rzdscanseats.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
 public enum NotificatorType {
 
     BOTTOM("нижнее"),
@@ -8,7 +13,4 @@ public enum NotificatorType {
 
     private final String typeName;
 
-    NotificatorType(String typeName) {
-        this.typeName = typeName;
-    }
 }
