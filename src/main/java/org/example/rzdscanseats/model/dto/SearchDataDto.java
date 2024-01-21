@@ -1,9 +1,10 @@
-package org.example.rzdscanseats.model;
+package org.example.rzdscanseats.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.rzdscanseats.model.enums.CarriageType;
 
 import java.time.LocalDate;
 
@@ -11,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SearchData {
+public class SearchDataDto {
 
     private Long userId;
 

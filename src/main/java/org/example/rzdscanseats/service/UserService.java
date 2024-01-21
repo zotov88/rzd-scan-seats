@@ -1,9 +1,10 @@
 package org.example.rzdscanseats.service;
 
 
+import lombok.RequiredArgsConstructor;
 import org.example.rzdscanseats.constant.MailConstants;
-import org.example.rzdscanseats.model.Role;
 import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.model.enums.Role;
 import org.example.rzdscanseats.repository.UserRepository;
 import org.example.rzdscanseats.service.util.mailutil.MailUtil;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,19 +15,12 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository repository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final JavaMailSender javaMailSender;
-
-    public UserService(UserRepository repository,
-                       BCryptPasswordEncoder bCryptPasswordEncoder,
-                       JavaMailSender javaMailSender) {
-        this.repository = repository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-        this.javaMailSender = javaMailSender;
-    }
 
     public User getById(final Long id) {
         return repository.getReferenceById(id);

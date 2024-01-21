@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.rzdscanseats.model.enums.SeatType;
 
 @Entity
 @Table(schema = "rzd", name = "seats")

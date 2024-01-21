@@ -1,10 +1,10 @@
 package org.example.rzdscanseats.service.util.mailutil;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.mail.SimpleMailMessage;
 
+@UtilityClass
 public class MailUtil {
-
-    private MailUtil() {}
 
     public static SimpleMailMessage createMailMessage(final String email, 
                                                       final String subject,

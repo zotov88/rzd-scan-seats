@@ -1,6 +1,11 @@
 package org.example.rzdscanseats.controller;
 
-import org.example.rzdscanseats.model.*;
+import lombok.RequiredArgsConstructor;
+import org.example.rzdscanseats.model.FreePlaceInfo;
+import org.example.rzdscanseats.model.Route;
+import org.example.rzdscanseats.model.dto.SearchDataDto;
+import org.example.rzdscanseats.model.enums.CarriageType;
+import org.example.rzdscanseats.model.enums.NotificatorType;
 import org.example.rzdscanseats.service.RouteService;
 import org.example.rzdscanseats.service.TrainService;
 import org.example.rzdscanseats.service.UserService;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/routes")
 public class RouteController {
 
@@ -19,27 +25,19 @@ public class RouteController {
     private final TrainService trainService;
     private final UserService userService;
 
-    public RouteController(RouteService routeService,
-                           TrainService trainService,
-                           UserService userService) {
-        this.routeService = routeService;
-        this.trainService = trainService;
-        this.userService = userService;
-    }
-
     @GetMapping("/add/{userId}")
     public String add(@PathVariable String userId,
                       Model model) {
-        model.addAttribute("searchDataModel", new SearchData());
+        model.addAttribute("searchDataModel", new SearchDataDto());
         model.addAttribute("typeCarriage", CarriageType.values());
         return "routes/add";
     }
 
     @PostMapping("/add/{userId}")
     public String add(@PathVariable Long userId,
-                      @ModelAttribute("searchDataModel") SearchData searchData) {
-        searchData.setUserId(userId);
-        routeService.create(searchData);
+                      @ModelAttribute("searchDataModel") SearchDataDto searchDataDto) {
+        searchDataDto.setUserId(userId);
+        routeService.create(searchDataDto);
         return "redirect:/routes/all/" + userId;
     }
 
@@ -98,7 +96,4 @@ public class RouteController {
         return "redirect:/routes/all/" +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
-
-    //TODO сделать страницу, которая будет отображать текущий уровень оповещения и при необходимости можно будет менять его
-
 }

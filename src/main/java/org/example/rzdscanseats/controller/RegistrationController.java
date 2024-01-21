@@ -1,5 +1,6 @@
 package org.example.rzdscanseats.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.rzdscanseats.model.User;
 import org.example.rzdscanseats.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -13,14 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import static org.example.rzdscanseats.constant.RolesConstants.ADMIN;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/registration")
 public class RegistrationController {
 
     private final UserService userService;
-
-    public RegistrationController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("")
     public String registration(Model model) {

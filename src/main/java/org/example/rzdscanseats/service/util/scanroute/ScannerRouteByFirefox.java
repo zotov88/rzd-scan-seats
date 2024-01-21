@@ -1,6 +1,10 @@
 package org.example.rzdscanseats.service.util.scanroute;
 
-import org.example.rzdscanseats.model.*;
+import org.example.rzdscanseats.model.Carriage;
+import org.example.rzdscanseats.model.Route;
+import org.example.rzdscanseats.model.Seat;
+import org.example.rzdscanseats.model.Train;
+import org.example.rzdscanseats.model.dto.SearchDataDto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -18,7 +22,7 @@ public final class ScannerRouteByFirefox extends ScannerRoute {
     private FirefoxDriver driver;
 
     @Override
-    public Route apply(SearchData data) {
+    public Route apply(SearchDataDto data) {
         Carriage carriage = Carriage.builder().type(data.getCarriageType()).build();
         Train train = Train.builder().name(data.getTrainName()).build();
         train.getCarriages().add(carriage);

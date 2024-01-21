@@ -1,9 +1,10 @@
 package org.example.rzdscanseats.service;
 
+import lombok.RequiredArgsConstructor;
 import org.example.rzdscanseats.model.Carriage;
 import org.example.rzdscanseats.model.FreePlaceInfo;
-import org.example.rzdscanseats.model.SeatType;
 import org.example.rzdscanseats.model.Train;
+import org.example.rzdscanseats.model.enums.SeatType;
 import org.example.rzdscanseats.repository.TrainRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,11 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class TrainService {
 
     private final TrainRepository trainRepository;
     private final SeatService seatService;
-
-    public TrainService(TrainRepository trainRepository, SeatService seatService) {
-        this.trainRepository = trainRepository;
-        this.seatService = seatService;
-    }
 
     public List<FreePlaceInfo> getFreePlacesInfo(Train train) {
         List<FreePlaceInfo> freePlaceInfos = new ArrayList<>();

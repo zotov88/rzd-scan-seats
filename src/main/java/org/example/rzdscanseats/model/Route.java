@@ -2,6 +2,7 @@ package org.example.rzdscanseats.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.rzdscanseats.model.enums.NotificatorType;
 
 import java.time.LocalDate;
 

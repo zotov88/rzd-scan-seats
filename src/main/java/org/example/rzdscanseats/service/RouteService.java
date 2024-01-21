@@ -1,7 +1,14 @@
 package org.example.rzdscanseats.service;
 
 import jakarta.transaction.Transactional;
-import org.example.rzdscanseats.model.*;
+import lombok.RequiredArgsConstructor;
+import org.example.rzdscanseats.model.FreePlaceInfo;
+import org.example.rzdscanseats.model.Route;
+import org.example.rzdscanseats.model.Train;
+import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.model.dto.SearchDataDto;
+import org.example.rzdscanseats.model.enums.NotificatorType;
+import org.example.rzdscanseats.model.enums.SeatType;
 import org.example.rzdscanseats.repository.RouteRepository;
 import org.example.rzdscanseats.service.util.notification.SenderNotifications;
 import org.example.rzdscanseats.service.util.scanroute.ScannerRoute;
@@ -13,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 @Transactional
 public class RouteService {
 
@@ -22,19 +30,7 @@ public class RouteService {
     private final ScannerRoute scannerRoute;
     private final SenderNotifications senderNotifications;
 
-    public RouteService(UserService userService,
-                        TrainService trainService,
-                        RouteRepository routeRepository,
-                        ScannerRoute scannerRoute,
-                        SenderNotifications senderNotifications) {
-        this.userService = userService;
-        this.trainService = trainService;
-        this.routeRepository = routeRepository;
-        this.scannerRoute = scannerRoute;
-        this.senderNotifications = senderNotifications;
-    }
-
-    public void create(SearchData data) {
+    public void create(SearchDataDto data) {
         User user = userService.getById(data.getUserId());
         Route route = scannerRoute.apply(data);
         route.setUser(user);
@@ -48,7 +44,7 @@ public class RouteService {
 
     public void update(Long routeId) {
         Route route = getById(routeId);
-        SearchData data = SearchData.builder().
+        SearchDataDto data = SearchDataDto.builder().
                 cityTo(route.getCityTo()).
                 cityFrom(route.getCityFrom()).
                 date(route.getDate()).

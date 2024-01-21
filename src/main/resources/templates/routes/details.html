@@ -28,14 +28,14 @@
             <tr th:each="f : ${freePlaceInfos}">
                 <td th:text="${f.getCarriageNumber()}"></td>
                 <td th:text="${f.getAllSeats()}"></td>
-                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM)}"></td>
-                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM)}"></td>
-                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP)}"></td>
-                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP)}"></td>
-                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM_SIDE)}"></td>
-                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).BOTTOM_SIDE)}"></td>
-                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP_SIDE)}"></td>
-                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.SeatType).TOP_SIDE)}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).BOTTOM)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).BOTTOM)}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).TOP)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).TOP)}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).BOTTOM_SIDE)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).BOTTOM_SIDE)}"></td>
+                <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).TOP_SIDE)}"></td>
+                <td th:text="${f.getPricePlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).TOP_SIDE)}"></td>
             </tr>
             </tbody>
         </table>

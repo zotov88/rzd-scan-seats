@@ -2,6 +2,7 @@ package org.example.rzdscanseats.model;
 
 import lombok.Builder;
 import lombok.Data;
+import org.example.rzdscanseats.model.enums.SeatType;
 
 import java.util.HashMap;
 import java.util.Map;
