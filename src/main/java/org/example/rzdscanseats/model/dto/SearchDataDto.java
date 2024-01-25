@@ -15,15 +15,9 @@ import java.time.LocalDate;
 public class SearchDataDto {
 
     private Long userId;
-
     private String cityFrom;
-
     private String cityTo;
-
     private LocalDate date;
-
     private String trainName;
-
     private CarriageType carriageType;
-
 }

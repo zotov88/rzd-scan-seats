@@ -18,16 +18,27 @@ public interface RouteConstant {
 
     String DROP_DOWN_TO = "//*[@id=\"rzd-search-widget\"]/div[1]/div[1]/div[1]/div[2]/ul/li[2]";
 
-    String TRAIN_1 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[1]";
-    String TRAIN_2 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[2]";
-    String TRAIN_3 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[3]";
-    String TRAIN_4 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[4]";
-    String TRAIN_5 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[5]";
-    String TRAIN_6 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[6]";
-    String TRAIN_7 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[7]";
-    String TRAIN_8 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[8]";
-    String TRAIN_9 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[9]";
-    String TRAIN_10 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[10]";
+//    String TRAIN_1 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[1]";
+//    String TRAIN_2 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[2]";
+//    String TRAIN_3 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[3]";
+//    String TRAIN_4 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[4]";
+//    String TRAIN_5 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[5]";
+//    String TRAIN_6 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[6]";
+//    String TRAIN_7 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[7]";
+//    String TRAIN_8 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[8]";
+//    String TRAIN_9 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[9]";
+//    String TRAIN_10 = "/html/body/rzd-app/div/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[10]";
+
+    String TRAIN_1 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[1]/div/div";
+    String TRAIN_2 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[2]/div/div";
+    String TRAIN_3 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[3]/div/div";
+    String TRAIN_4 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[4]/div/div";
+    String TRAIN_5 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[5]/div/div";
+    String TRAIN_6 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[6]/div/div";
+    String TRAIN_7 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[7]/div/div";
+    String TRAIN_8 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[8]/div/div";
+    String TRAIN_9 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[9]/div/div";
+    String TRAIN_10 = "/html/body/rzd-app/main/div/rzd-search-results/div/div/rzd-base-result-theme/div/div/div[2]/rzd-search-results-card-list/div/rzd-search-results-card-railway-flat-card[10]/div/div";
 
     List<String> TRAINS = List.of(TRAIN_1, TRAIN_2, TRAIN_3, TRAIN_4, TRAIN_5, TRAIN_6, TRAIN_7, TRAIN_8, TRAIN_9, TRAIN_10);
 

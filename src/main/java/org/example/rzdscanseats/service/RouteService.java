@@ -74,14 +74,14 @@ public class RouteService {
         routeRepository.deleteById(routeId);
     }
 
-    public List<Long> getDistinctByUserId() {
-        return routeRepository.getDistinctByUserId();
-    }
-
     public void checkAllRoutes() {
         for (Long userId : getDistinctByUserId()) {
             checkRoutes(getRoutes(userId));
         }
+    }
+
+    private List<Long> getDistinctByUserId() {
+        return routeRepository.getDistinctByUserId();
     }
 
     private List<Route> getRoutes(Long userId) {
