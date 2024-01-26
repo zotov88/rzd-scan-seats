@@ -1,7 +1,6 @@
 package org.example.rzdscanseats.config;
 
 import org.example.rzdscanseats.service.RouteService;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,7 +13,7 @@ public class Scheduler {
     }
 
 //    @Scheduled(cron = "0 0 9-21/3 * * *")
-    @Scheduled(cron = "0 * * * * *")
+//    @Scheduled(cron = "0 * * * * *")
     public void updateRouteListAllUsers() {
         routeService.checkAllRoutes();
     }
