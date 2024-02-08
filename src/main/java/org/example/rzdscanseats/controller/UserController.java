@@ -43,7 +43,7 @@ public class UserController {
                          BindingResult bindingResult) {
         User emailDuplicated = userService.getByEmail(userUpdated.getEmail().toLowerCase());
         User foundUser = userService.getById(userUpdated.getId());
-        if (emailDuplicated != null && !Objects.equals(emailDuplicated.getEmail(), foundUser.getEmail())) {
+        if (isNoDuplicateEmail(emailDuplicated, foundUser)) {
             bindingResult.rejectValue("email", "error.email", "Такой email уже существует");
             return "user/updateUser";
         }
@@ -54,6 +54,10 @@ public class UserController {
         userService.update(foundUser);
         return "redirect:/routes/all/" +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
+    }
+
+    private static boolean isNoDuplicateEmail(User emailDuplicated, User foundUser) {
+        return emailDuplicated != null && !Objects.equals(emailDuplicated.getEmail(), foundUser.getEmail());
     }
 
     @GetMapping("/remember-password")

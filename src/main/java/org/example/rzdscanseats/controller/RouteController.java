@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.example.rzdscanseats.constant.Path.REDIRECT_ROUTES_ALL;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/routes")
@@ -38,28 +40,27 @@ public class RouteController {
                       @ModelAttribute("searchDataModel") SearchDataDto searchDataDto) {
         searchDataDto.setUserId(userId);
         routeService.create(searchDataDto);
-        return "redirect:/routes/all/" + userId;
+        return REDIRECT_ROUTES_ALL + userId;
     }
 
     @GetMapping("/all/{userId}")
     public String all(@PathVariable Long userId,
                       Model model) {
-        List<Route> routes = routeService.getRoutesByUserId(userId);
-        model.addAttribute("routes", routes);
+        model.addAttribute("routes", routeService.getRoutesByUserId(userId));
         return "routes/all";
     }
 
     @GetMapping("/update/{routeId}")
     public String update(@PathVariable Long routeId) {
         routeService.update(routeId);
-        return "redirect:/routes/all/" +
+        return REDIRECT_ROUTES_ALL +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
     @GetMapping("/delete/{routeId}")
     public String delete(@PathVariable Long routeId) {
         routeService.delete(routeId);
-        return "redirect:/routes/all/" +
+        return REDIRECT_ROUTES_ALL +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
@@ -75,7 +76,7 @@ public class RouteController {
     @GetMapping("/checkall")
     public String checkAll() {
         routeService.checkAllRoutes();
-        return "redirect:/routes/all/" +
+        return REDIRECT_ROUTES_ALL +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 
@@ -93,7 +94,7 @@ public class RouteController {
         Route route = routeService.getById(routeId);
         route.setNotificatorType(routeTN.getNotificatorType());
         routeService.updateEnt(route);
-        return "redirect:/routes/all/" +
+        return REDIRECT_ROUTES_ALL +
                 userService.getByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId();
     }
 }

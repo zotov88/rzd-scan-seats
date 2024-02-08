@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import static org.example.rzdscanseats.constant.Path.REGISTRATION;
 import static org.example.rzdscanseats.constant.RolesConstants.ADMIN;
 
 @Controller
@@ -23,7 +24,7 @@ public class RegistrationController {
     @GetMapping("")
     public String registration(Model model) {
         model.addAttribute("userForm", new User());
-        return "registration";
+        return REGISTRATION;
     }
 
     @PostMapping("")
@@ -35,11 +36,11 @@ public class RegistrationController {
         user.setEmail(email);
         if (login.equalsIgnoreCase(ADMIN) || (userService.getByLogin(login) != null)) {
             bindingResult.rejectValue("login", "login.error", "Этот логин уже существует");
-            return "registration";
+            return REGISTRATION;
         }
         if (userService.getByEmail(email) != null) {
             bindingResult.rejectValue("email", "email.error", "Этот email уже существует");
-            return "registration";
+            return REGISTRATION;
         }
         userService.create(user);
         return "redirect:/login";
