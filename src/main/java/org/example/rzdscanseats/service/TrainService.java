@@ -1,10 +1,10 @@
 package org.example.rzdscanseats.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.rzdscanseats.model.Carriage;
-import org.example.rzdscanseats.model.FreePlaceInfo;
-import org.example.rzdscanseats.model.Train;
-import org.example.rzdscanseats.model.enums.SeatType;
+import org.example.rzdscanseats.entity.Carriage;
+import org.example.rzdscanseats.dto.FreePlaceInfoDto;
+import org.example.rzdscanseats.entity.Train;
+import org.example.rzdscanseats.enums.SeatType;
 import org.example.rzdscanseats.repository.TrainRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +19,19 @@ public class TrainService {
     private final TrainRepository trainRepository;
     private final SeatService seatService;
 
-    public List<FreePlaceInfo> getFreePlacesInfo(Train train) {
-        List<FreePlaceInfo> freePlaceInfos = new ArrayList<>();
+    public List<FreePlaceInfoDto> getFreePlacesInfo(Train train) {
+        List<FreePlaceInfoDto> freePlaceInfoDtos = new ArrayList<>();
         for (Carriage carriage : train.getCarriages()) {
             Map<SeatType, Integer> countPlacesMap = seatService.getCountPlacesMap(carriage);
             Map<SeatType, Double> pricePlacesMap = seatService.getPricePlacesMap(carriage);
-            freePlaceInfos.add(FreePlaceInfo.builder().
+            freePlaceInfoDtos.add(FreePlaceInfoDto.builder().
                     carriageNumber(carriage.getNumber()).
                     allSeats(carriage.getCountSeats()).
                     countPlacesMap(countPlacesMap).
                     pricePlacesMap(pricePlacesMap).
                     build());
         }
-        return freePlaceInfos;
+        return freePlaceInfoDtos;
     }
 
     public void delete(Train train) {

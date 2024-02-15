@@ -25,7 +25,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="f : ${freePlaceInfos}">
+            <tr th:each="f : ${freePlaceInfoDtos}">
                 <td th:text="${f.getCarriageNumber()}"></td>
                 <td th:text="${f.getAllSeats()}"></td>
                 <td th:text="${f.getCountPlacesMap().get(T(org.example.rzdscanseats.model.enums.SeatType).BOTTOM)}"></td>

@@ -3,7 +3,7 @@ package org.example.rzdscanseats.controller;
 import jakarta.security.auth.message.AuthException;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.entity.User;
 import org.example.rzdscanseats.service.UserService;
 import org.example.rzdscanseats.service.util.checkaccess.CheckAccess;
 import org.springframework.security.core.context.SecurityContextHolder;

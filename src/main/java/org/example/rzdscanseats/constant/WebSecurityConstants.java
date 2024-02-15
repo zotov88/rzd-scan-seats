@@ -1,10 +1,13 @@
 package org.example.rzdscanseats.constant;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.List;
 
-public interface WebSecurityConstants {
+@UtilityClass
+public class WebSecurityConstants {
 
-    List<String> RESOURCES_WHITE_LIST = List.of
+    public List<String> RESOURCES_WHITE_LIST = List.of
             (
                     "/resources/**",
                     "/static/**",
@@ -16,7 +19,7 @@ public interface WebSecurityConstants {
                     "/users/change-password",
                     "/"
             );
-    List<String> AUTH_LIST = List.of
+    public List<String> AUTH_LIST = List.of
             (
                     "/routes/**"
             );

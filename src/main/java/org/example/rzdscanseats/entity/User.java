@@ -1,8 +1,8 @@
-package org.example.rzdscanseats.model;
+package org.example.rzdscanseats.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.rzdscanseats.model.enums.Role;
+import org.example.rzdscanseats.enums.Role;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 

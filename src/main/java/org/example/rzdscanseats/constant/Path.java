@@ -1,8 +1,11 @@
 package org.example.rzdscanseats.constant;
 
-public interface Path {
+import lombok.experimental.UtilityClass;
 
-    String REGISTRATION = "registration";
+@UtilityClass
+public class Path {
 
-    String REDIRECT_ROUTES_ALL = "redirect:/routes/all/";
+    public String REGISTRATION = "registration";
+
+    public String REDIRECT_ROUTES_ALL = "redirect:/routes/all/";
 }

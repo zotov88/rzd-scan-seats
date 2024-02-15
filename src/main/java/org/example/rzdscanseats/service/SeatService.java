@@ -1,8 +1,8 @@
 package org.example.rzdscanseats.service;
 
-import org.example.rzdscanseats.model.Carriage;
-import org.example.rzdscanseats.model.Seat;
-import org.example.rzdscanseats.model.enums.SeatType;
+import org.example.rzdscanseats.entity.Carriage;
+import org.example.rzdscanseats.entity.Seat;
+import org.example.rzdscanseats.enums.SeatType;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;

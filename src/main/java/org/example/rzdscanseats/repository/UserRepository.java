@@ -1,7 +1,7 @@
 package org.example.rzdscanseats.repository;
 
 
-import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

@@ -1,10 +1,13 @@
 package org.example.rzdscanseats.constant;
 
-public interface MailConstants {
+import lombok.experimental.UtilityClass;
 
-    String MAIL_SUBJECT_FOR_REMEMBER_PASSWORD = "Восстановление пароля";
+@UtilityClass
+public class MailConstants {
 
-    String MAIL_MESSAGE_FOR_REMEMBER_PASSWORD = """
+    public String MAIL_SUBJECT_FOR_REMEMBER_PASSWORD = "Восстановление пароля";
+
+    public String MAIL_MESSAGE_FOR_REMEMBER_PASSWORD = """
             Добрый день.
             Для восстановления пароля перейдите по ссылке:
             http://localhost:8080/users/change-password?uuid=

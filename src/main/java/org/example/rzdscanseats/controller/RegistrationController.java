@@ -1,7 +1,7 @@
 package org.example.rzdscanseats.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.entity.User;
 import org.example.rzdscanseats.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

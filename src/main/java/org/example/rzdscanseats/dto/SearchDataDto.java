@@ -1,10 +1,10 @@
-package org.example.rzdscanseats.model.dto;
+package org.example.rzdscanseats.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.rzdscanseats.model.enums.CarriageType;
+import org.example.rzdscanseats.enums.CarriageType;
 
 import java.time.LocalDate;
 

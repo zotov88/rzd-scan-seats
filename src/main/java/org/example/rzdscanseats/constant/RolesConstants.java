@@ -1,7 +1,10 @@
 package org.example.rzdscanseats.constant;
 
-public interface RolesConstants {
+import lombok.experimental.UtilityClass;
 
-    String USER = "USER";
-    String ADMIN = "ADMIN";
+@UtilityClass
+public class RolesConstants {
+
+    public String USER = "USER";
+    public String ADMIN = "ADMIN";
 }

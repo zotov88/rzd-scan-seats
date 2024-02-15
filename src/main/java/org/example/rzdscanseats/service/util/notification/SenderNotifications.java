@@ -1,7 +1,7 @@
 package org.example.rzdscanseats.service.util.notification;
 
 import lombok.RequiredArgsConstructor;
-import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

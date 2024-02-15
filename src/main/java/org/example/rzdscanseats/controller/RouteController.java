@@ -1,11 +1,11 @@
 package org.example.rzdscanseats.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.rzdscanseats.model.FreePlaceInfo;
-import org.example.rzdscanseats.model.Route;
-import org.example.rzdscanseats.model.dto.SearchDataDto;
-import org.example.rzdscanseats.model.enums.CarriageType;
-import org.example.rzdscanseats.model.enums.NotificatorType;
+import org.example.rzdscanseats.dto.FreePlaceInfoDto;
+import org.example.rzdscanseats.entity.Route;
+import org.example.rzdscanseats.dto.SearchDataDto;
+import org.example.rzdscanseats.enums.CarriageType;
+import org.example.rzdscanseats.enums.NotificatorType;
 import org.example.rzdscanseats.service.RouteService;
 import org.example.rzdscanseats.service.TrainService;
 import org.example.rzdscanseats.service.UserService;
@@ -68,8 +68,8 @@ public class RouteController {
     public String details(@PathVariable Long routeId,
                           Model model) {
         Route route = routeService.getById(routeId);
-        List<FreePlaceInfo> freePlaceInfos = trainService.getFreePlacesInfo(route.getTrain());
-        model.addAttribute("freePlaceInfos", freePlaceInfos);
+        List<FreePlaceInfoDto> freePlaceInfoDtos = trainService.getFreePlacesInfo(route.getTrain());
+        model.addAttribute("freePlaceInfos", freePlaceInfoDtos);
         return "routes/details";
     }
 

@@ -1,7 +1,7 @@
 package org.example.rzdscanseats.service.userdetails;
 
 import org.example.rzdscanseats.constant.RolesConstants;
-import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.entity.User;
 import org.example.rzdscanseats.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;

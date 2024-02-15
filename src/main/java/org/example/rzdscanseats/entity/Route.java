@@ -1,8 +1,8 @@
-package org.example.rzdscanseats.model;
+package org.example.rzdscanseats.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.rzdscanseats.model.enums.NotificatorType;
+import org.example.rzdscanseats.enums.NotificatorType;
 
 import java.time.LocalDate;
 

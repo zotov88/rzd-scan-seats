@@ -3,8 +3,8 @@ package org.example.rzdscanseats.service;
 
 import lombok.RequiredArgsConstructor;
 import org.example.rzdscanseats.constant.MailConstants;
-import org.example.rzdscanseats.model.User;
-import org.example.rzdscanseats.model.enums.Role;
+import org.example.rzdscanseats.entity.User;
+import org.example.rzdscanseats.enums.Role;
 import org.example.rzdscanseats.repository.UserRepository;
 import org.example.rzdscanseats.service.util.mailutil.MailUtil;
 import org.springframework.mail.SimpleMailMessage;

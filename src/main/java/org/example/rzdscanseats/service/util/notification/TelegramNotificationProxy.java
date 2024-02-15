@@ -2,7 +2,7 @@ package org.example.rzdscanseats.service.util.notification;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.request.SendMessage;
-import org.example.rzdscanseats.model.User;
+import org.example.rzdscanseats.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component

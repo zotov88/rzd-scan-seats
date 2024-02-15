@@ -1,10 +1,10 @@
 package org.example.rzdscanseats.service.util.scanroute;
 
-import org.example.rzdscanseats.model.Carriage;
-import org.example.rzdscanseats.model.Route;
-import org.example.rzdscanseats.model.Seat;
-import org.example.rzdscanseats.model.Train;
-import org.example.rzdscanseats.model.dto.SearchDataDto;
+import org.example.rzdscanseats.entity.Carriage;
+import org.example.rzdscanseats.entity.Route;
+import org.example.rzdscanseats.entity.Seat;
+import org.example.rzdscanseats.entity.Train;
+import org.example.rzdscanseats.dto.SearchDataDto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;

@@ -2,13 +2,13 @@ package org.example.rzdscanseats.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.example.rzdscanseats.model.FreePlaceInfo;
-import org.example.rzdscanseats.model.Route;
-import org.example.rzdscanseats.model.Train;
-import org.example.rzdscanseats.model.User;
-import org.example.rzdscanseats.model.dto.SearchDataDto;
-import org.example.rzdscanseats.model.enums.NotificatorType;
-import org.example.rzdscanseats.model.enums.SeatType;
+import org.example.rzdscanseats.dto.FreePlaceInfoDto;
+import org.example.rzdscanseats.entity.Route;
+import org.example.rzdscanseats.entity.Train;
+import org.example.rzdscanseats.entity.User;
+import org.example.rzdscanseats.dto.SearchDataDto;
+import org.example.rzdscanseats.enums.NotificatorType;
+import org.example.rzdscanseats.enums.SeatType;
 import org.example.rzdscanseats.repository.RouteRepository;
 import org.example.rzdscanseats.service.util.notification.SenderNotifications;
 import org.example.rzdscanseats.service.util.scanroute.ScannerRoute;
@@ -100,7 +100,7 @@ public class RouteService {
         StringBuilder sb = new StringBuilder();
         sb.append("Поезд ").append(route.getTrain().getName()).
                 append(" ").append(route.getDate()).append("\n");
-        for (FreePlaceInfo placeInfo : trainService.getFreePlacesInfo(route.getTrain())) {
+        for (FreePlaceInfoDto placeInfo : trainService.getFreePlacesInfo(route.getTrain())) {
             for (SeatType type : placeInfo.getCountPlacesMap().keySet()) {
                 if (!seatInfo.containsKey(type)) {
                     seatInfo.put(type, 0);

@@ -1,15 +1,15 @@
-package org.example.rzdscanseats.model;
+package org.example.rzdscanseats.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import org.example.rzdscanseats.model.enums.SeatType;
+import org.example.rzdscanseats.enums.SeatType;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 @Builder
-public class FreePlaceInfo {
+public class FreePlaceInfoDto {
 
     private int carriageNumber;
 

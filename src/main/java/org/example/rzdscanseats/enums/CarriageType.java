@@ -1,4 +1,4 @@
-package org.example.rzdscanseats.model.enums;
+package org.example.rzdscanseats.enums;
 
 import lombok.Getter;
 

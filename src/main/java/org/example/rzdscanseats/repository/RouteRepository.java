@@ -1,6 +1,6 @@
 package org.example.rzdscanseats.repository;
 
-import org.example.rzdscanseats.model.Route;
+import org.example.rzdscanseats.entity.Route;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

@@ -1,4 +1,4 @@
-package org.example.rzdscanseats.model;
+package org.example.rzdscanseats.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
